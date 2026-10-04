@@ -62,6 +62,7 @@ Faça isto **ANTES** de apagar qualquer coisa. Depois de apagar, não dá mais.
 3. **Faça:** digite a senha de administrador do Mac e clique em OK.
    - **Você vê:** as opções de segurança. [FOTO-03: tela do Utilitário de Segurança da Inicialização]
    - **Se não vir** (senha recusada ou desconhecida): PARE e chame o suporte.
+   - **Se aparecer que não há administrador ou nenhum usuário** (o disco já foi apagado antes): PARE e chame o suporte. Sem um administrador, não dá para liberar o pendrive, e o Mac não liga por ele.
 4. **Faça:** marque **Segurança Média** e **Permitir inicialização por mídia externa**.
    - **Você vê:** as duas opções marcadas. [FOTO-04: as duas opções marcadas]
    - **Se não vir:** feche a janela, abra de novo e repita.
@@ -134,13 +135,16 @@ Data errada é a causa mais comum de "o instalador está danificado". Acerte **a
    - Se aparecer "esta cópia do aplicativo está danificada": volte ao passo 5 e acerte a data.
 3. **Faça:** quando aparecer a tela do país, escolha **Brasil** e siga.
    - **Você vê:** o **Assistente de Configuração**. Agora pode tirar o pendrive. [FOTO-10: primeira tela do Assistente de Configuração]
-4. **Faça (Mac de 2010 a 2017):** na tela de Wi-Fi, clique em **Outras Opções de Rede** → **Meu computador não se conecta à internet**.
-   - **Você vê:** o Assistente continua sem rede. [FOTO-11: tela "Outras Opções de Rede"]
-5. **Faça (Mac de 2018 ou 2019):** na tela de Wi-Fi ou **Ativar Mac**, conecte no hotspot do celular.
+4. **Se você vai VENDER este Mac:** na primeira tela do Assistente, aperte **Command (⌘) + Q** → **Desligar**. O comprador liga e configura como um Mac novo.
+   - **Você vê:** uma janela perguntando se quer desligar. Clique em **Desligar**. [FOTO-11: janela de desligar aberta com Command + Q no Assistente]
+   - **Pare aqui:** não crie conta e **não faça o passo 8** (Office). O comprador instala o que quiser.
+5. **Faça (Mac de 2010 a 2017):** na tela de Wi-Fi, clique em **Outras Opções de Rede** → **Meu computador não se conecta à internet**. **(A CONFIRMAR NA BANCADA:** o nome desta opção muda conforme a versão do macOS.**)**
+   - **Você vê:** o Assistente continua sem rede. [FOTO-12: tela "Outras Opções de Rede"]
+6. **Faça (Mac de 2018 ou 2019):** na tela de Wi-Fi ou **Ativar Mac**, conecte no hotspot do celular.
    - No iPhone: Ajustes → Acesso Pessoal → ligue **Maximizar Compatibilidade**.
    - **Você vê:** "Ativando..." e depois o Assistente continua (leva 1–2 minutos).
    - **Se não vir** e pedir o Apple ID de outra pessoa: PARE e chame o suporte.
-6. **Faça:** siga o Assistente e crie a sua conta (nome e senha).
+7. **Faça:** siga o Assistente e crie a sua conta (nome e senha).
    - **Anote a senha.** É a "senha do Mac" que o Office vai pedir.
    - **Você vê:** a mesa do Mac (área de trabalho). Pronto: macOS instalado!
 
@@ -152,22 +156,24 @@ Precisa de **internet** e da **sua licença** do Office (conta Microsoft).
 1. **Faça:** conecte o Mac à internet (Wi-Fi de casa ou cabo). Ligue o carregador.
    - Evite Wi-Fi de hotel ou empresa, que pede login.
 2. **Faça:** ligue o pendrive. Abra o **Finder** (o rosto azul na barra de baixo).
-   - **Você vê:** **KIT** na coluna da esquerda, em **Locais**. [FOTO-12: Finder com KIT em Locais]
+   - **Você vê:** **KIT** na coluna da esquerda, em **Locais**. [FOTO-13: Finder com KIT em Locais]
    - **Se não vir:** tire o pendrive, espere 10 segundos e ligue de novo.
 3. **Faça:** clique em **KIT** e dê **dois cliques** em **Instalar Office.command**.
-   - **Você vê:** uma janela do Terminal com a explicação do instalador. [FOTO-13: Terminal com a explicação do "Instalar Office.command"]
-   - **Se não vir** e o macOS disser que o arquivo "não pode ser aberto": clique nele com o botão direito → **Abrir** → **Abrir**. **(A CONFIRMAR NA BANCADA)**
-4. **Faça:** se o macOS perguntar se o Terminal pode acessar arquivos em um **volume removível**, clique em **OK**. **(A CONFIRMAR NA BANCADA)** [FOTO-14: pergunta de acesso ao volume removível]
+   - **Você vê:** uma janela do Terminal com a explicação do instalador. [FOTO-14: Terminal com a explicação do "Instalar Office.command"]
+   - **Se não vir** e o macOS disser que o arquivo "não pode ser aberto" **(A CONFIRMAR NA BANCADA)**:
+     - **macOS 12 a 14:** clique no arquivo com o botão direito → **Abrir** → **Abrir**.
+     - **macOS 15 ou mais novo:** abra **Ajustes do Sistema** → **Privacidade e Segurança**, role até o aviso do **Instalar Office.command**, clique em **Abrir Mesmo Assim** e digite a senha do Mac. [FOTO-15: aviso do "Instalar Office.command" com o botão "Abrir Mesmo Assim" em Privacidade e Segurança]
+4. **Faça:** se o macOS perguntar se o Terminal pode acessar arquivos em um **volume removível**, clique em **OK**. **(A CONFIRMAR NA BANCADA)** [FOTO-16: pergunta de acesso ao volume removível]
 5. **Faça:** quando pedir **Password**, digite a senha do Mac e aperte **Enter**.
    - **A senha NÃO aparece enquanto você digita.** Nem bolinhas. É normal: digite tudo e aperte Enter.
-   - **Você vê:** "Baixando o Office da Microsoft" e uma barra de progresso. O download tem cerca de 3 GB. [FOTO-15: barra de progresso do download]
+   - **Você vê:** "Baixando o Office da Microsoft" e uma barra de progresso. O download tem cerca de 3 GB. [FOTO-17: barra de progresso do download]
    - **Se não vir** e aparecer "Sorry, try again": a senha estava errada. Digite de novo com calma.
 6. **Faça:** espere. **Não feche a janela.** Depois do download vem "Instalando" (10 minutos ou mais).
-   - **Você vê:** **Pronto!** no fim. [FOTO-16: mensagem "Pronto!" no Terminal]
+   - **Você vê:** **Pronto!** no fim. [FOTO-18: mensagem "Pronto!" no Terminal]
    - **Se não vir** e aparecer **ERRO**: leia a mensagem e veja a tabela do passo 9.
 7. **Faça:** aperte **Enter** para fechar. Abra o **Microsoft Word** em **Aplicativos**.
 8. **Faça:** clique em **Entrar** e use a **conta Microsoft da sua licença**.
-   - **Você vê:** o Word pronto para usar. Crie um documento, escreva algo e salve para testar. [FOTO-17: tela de entrar com a conta Microsoft no Word]
+   - **Você vê:** o Word pronto para usar. Crie um documento, escreva algo e salve para testar. [FOTO-19: tela de entrar com a conta Microsoft no Word]
    - **Se não vir** e o Word disser que só pode abrir e imprimir: a licença não ativou. Confira a conta ou chame o suporte.
 
 ## 9. Se algo der errado
@@ -189,8 +195,6 @@ Na janela do Office, a linha que começa com **ERRO:** diz o que aconteceu.
 | `a instalação falhou` / `... não apareceu em Aplicativos` | Rode de novo. Se repetir, chame o suporte e diga a mensagem. |
 | `não foi possível identificar a versão do macOS` / `medir o espaço livre` / `criar a pasta temporária` | Reinicie o Mac e rode de novo. Se repetir, chame o suporte. |
 | `Sorry, try again` (depois da senha) | A senha estava errada. Digite de novo; ela não aparece na tela. |
-
-<!-- "a rede pede login" e "a internet funciona, mas..." só existem no install_office.sh depois do commit 1745972 (fix: travas de rede, espaço e quarentena), ainda fora de main. -->
 
 **Para "rodar de novo":** feche a janela e dê dois cliques outra vez em **Instalar Office.command**.
 
@@ -219,10 +223,12 @@ Na janela do Office, a linha que começa com **ERRO:** diz o que aconteceu.
 | FOTO-08 | Disco físico interno (item de cima) selecionado | Utilitário de Disco |
 | FOTO-09 | Janela Apagar com Nome, Formato e Esquema preenchidos | Utilitário de Disco |
 | FOTO-10 | Primeira tela (escolher o país) | Assistente de Configuração |
-| FOTO-11 | "Outras Opções de Rede" / "Meu computador não se conecta à internet" | Assistente de Configuração, tela de Wi-Fi |
-| FOTO-12 | KIT na coluna Locais | Finder |
-| FOTO-13 | Explicação inicial do "Instalar Office.command" | Terminal |
-| FOTO-14 | Pergunta de acesso a volume removível (se existir) | Alerta do macOS ao abrir o .command |
-| FOTO-15 | Barra de progresso do download | Terminal, durante o Office |
-| FOTO-16 | Mensagem "Pronto!" | Terminal, fim do Office |
-| FOTO-17 | Tela de entrar com a conta Microsoft | Word, primeira abertura |
+| FOTO-11 | Janela de desligar aberta com Command + Q | Assistente de Configuração, primeira tela (Mac para revenda) |
+| FOTO-12 | "Outras Opções de Rede" / "Meu computador não se conecta à internet" | Assistente de Configuração, tela de Wi-Fi |
+| FOTO-13 | KIT na coluna Locais | Finder |
+| FOTO-14 | Explicação inicial do "Instalar Office.command" | Terminal |
+| FOTO-15 | Aviso do "Instalar Office.command" com o botão "Abrir Mesmo Assim" | Ajustes do Sistema → Privacidade e Segurança (macOS 15+) |
+| FOTO-16 | Pergunta de acesso a volume removível (se existir) | Alerta do macOS ao abrir o .command |
+| FOTO-17 | Barra de progresso do download | Terminal, durante o Office |
+| FOTO-18 | Mensagem "Pronto!" | Terminal, fim do Office |
+| FOTO-19 | Tela de entrar com a conta Microsoft | Word, primeira abertura |
