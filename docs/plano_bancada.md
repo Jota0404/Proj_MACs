@@ -1,88 +1,87 @@
-# Plano de Bancada — `scripts/install_office.sh`
+# Plano de Bancada — Office (`Instalar Office.command` + `scripts/install_office.sh`)
 
 Oct 3, 2026 · @Jota
 
-Substitui o plano da `instalar_office_v2.sh` (que não está no repositório). Testa o script oficial de 43 linhas **em Mac real e Bash 3.2**, o que ainda não foi feito.
+Valida a instalação do Office **em Mac real e Bash 3.2**, o que ainda não foi feito. O script não leva Office no pendrive: baixa o instalador oficial da Microsoft conforme o macOS e confere a assinatura (`docs/decisoes.md`, ADR-001). O cliente roda só o lançador (ADR-002). Fazer depois do `docs/plano_bancada_pendrive.md`.
 
 ## Contrato do script
 
-| Código | Significado | O que o técnico faz |
+| Código | Significado | O lançador mostra |
 | --- | --- | --- |
-| 0 | Todos os `.pkg` de `assets/office/` instalados | Abrir o Word e ativar com a licença do cliente |
-| 1 | Qualquer trava ou falha; a causa está na linha `ERRO:` do console | Corrigir o que a mensagem diz e rodar de novo |
+| 0 | Office instalado; Word, Excel e PowerPoint em Aplicativos | `Pronto!` |
+| 1 | Qualquer trava ou falha; a causa e o que fazer estão na linha `ERRO:` | `Algo deu errado: leia a mensagem ERRO acima e tente de novo.` |
+| 2 | macOS 11 ou anterior: o Office atual não roda | `Este Mac é antigo demais para o Office atual.` |
 
-Travas, por ordem: `sudo` → kit em `/Volumes/...` → pasta `assets/office/` → carregador → 10 GB livres em `/` → pelo menos um `.pkg` (ignora `._*`) → `installer` de cada `.pkg`.
+Travas, por ordem: `sudo` → macOS (10.x/11 = código 2; 12 → 16.88, 13 → 16.101, 14+ → 16.113.3) → carregador → ano do relógio ≥ 2026 → 10 GB livres em `/` → internet. Depois: download → assinatura `Developer ID Installer: Microsoft Corporation` → `installer` → Word, Excel e PowerPoint em `/Applications`.
 
 O script não tem log próprio: o detalhe da instalação fica em `/var/log/install.log`.
 
 ## Antes de começar
 
-1. Pendrive exatamente como será vendido: `scripts/install_office.sh` e `assets/office/*.pkg` **de uma única versão de macOS** (o script instala todos os `.pkg` da pasta).
-2. Na bancada, confira a assinatura de cada `.pkg`: `pkgutil --check-signature assets/office/*.pkg` deve mostrar `Microsoft Corporation`.
-3. Mac sem Office (sem os apps Microsoft em `/Applications`), relógio correto, usuário administrador.
-4. Segunda janela do Terminal: `tail -f /var/log/install.log`. Guarde o código (`echo $?`), o tempo e a última linha `ERRO:` de cada tentativa.
-5. Repita tudo em **dois Macs**: um com HD mecânico e USB 2.0, outro com SSD.
+1. Pendrive gerado pelo `build_pendrive.sh` (Cenário 1 do plano do pendrive aprovado): a KIT tem `Instalar Office.command`, `scripts/install_office.sh` e `VERSION`.
+2. Macs sem Office (sem apps Microsoft em `/Applications`), usuário administrador. O ideal é um Mac com macOS 12, um com 13 e um com 14 ou mais novo; anote quais houve na bancada.
+3. Uma licença real do Office (conta Microsoft 365 ou Office 2019/2021 vinculado a uma conta) para o Cenário 3.
+4. Internet boa (o download tem cerca de 3 GB) e um hotspot para provocar a queda do Cenário 2.
+5. Segunda janela do Terminal: `tail -f /var/log/install.log`. Guarde o código, o tempo e a última linha `ERRO:` de cada tentativa (o código aparece como a mensagem final do lançador).
 
-Comando padrão: `sudo bash /Volumes/<PENDRIVE>/scripts/install_office.sh`
+Comando padrão: dois cliques em `Instalar Office.command` na KIT.
 
-## Cenário 0: travas (rápido, sem instalar nada)
+## Cenário 0: travas (nada é instalado)
 
 | # | Como provocar | Esperado |
 | --- | --- | --- |
-| 0A | Rodar sem `sudo` | `ERRO: execute com sudo.` · código 1 |
-| 0B | Copiar o kit para a Mesa e rodar de lá | `ERRO: o kit tem de rodar a partir de um volume em /Volumes/` · código 1 |
-| 0C | Deixar em `assets/office/` só um `._x.pkg` (ou nada) | `ERRO: nenhum .pkg em ...` · código 1 |
-| 0D | Rodar no Terminal do Recovery | Tem de abortar com código 1 antes de instalar (carregador, espaço ou outra trava). **Se chegar a `>> Instalando`, reprova:** `-target /` apontaria para o disco do Recovery. |
+| 0A | No Terminal, sem `sudo`: `bash /Volumes/KIT/scripts/install_office.sh` | `ERRO: o instalador precisa da senha do Mac...` · código 1 |
+| 0B | Mac com macOS 11 ou anterior, pelo lançador | `ERRO: este Mac tem o macOS 11...` e `Este Mac é antigo demais...` · código 2 |
+| 0C | Carregador desligado | `ERRO: ligue o carregador na tomada e rode de novo.` · código 1 |
+| 0D | Ajustes > Data e Hora: desligar o automático e pôr 01/01/2001 (**voltar a data depois**) | `ERRO: o relógio do Mac está no ano 2001. Acerte a data em...` · código 1 |
+| 0E | Wi-Fi desligado e sem cabo | `ERRO: sem acesso à internet. Conecte o Mac à internet (Wi-Fi ou cabo)...` · código 1 |
+| 0F | Opcional, só se houver um Mac com menos de 10 GB livres | `ERRO: o Mac tem menos de 10 GB livres...` · código 1 |
 
-## Cenário 1: pendrive removido
+**Reprova se:** qualquer caso começar o download (`>> Baixando`), ou a mensagem não disser o que fazer.
 
-1. **1A, durante a instalação.** Quando aparecer `>> Instalando`, puxe o pendrive.
-2. **1B, recuperação.** Reconecte (direto na porta, sem hub) e rode de novo.
+## Cenário 1: instalação pelo lançador
 
-**Esperado:** em 1A, `ERRO: installer falhou em ...` e código 1, sem travar. Em 1B, código 0 e Word, Excel, PowerPoint, Outlook e OneNote abrindo.
+Em cada macOS disponível (12, 13, 14+): dois cliques em `Instalar Office.command`, digitar a senha, esperar.
 
-**Reprova se:** o script ou o `installer` travar mais de 5 min sem sair, aparecer erro de sintaxe ou "unexpected EOF", ou a nova execução em 1B não deixar os cinco apps funcionando.
+**Esperado:** barra de progresso do download, `>> Instalando`, `Concluído...` e `Pronto!` (código 0). Word, Excel e PowerPoint abrem; Word > Sobre o Word mostra 16.88 (macOS 12), 16.101 (macOS 13) ou 16.113 (14+). Registre o tempo de download e o de instalação.
 
-## Cenário 2: sem rede
+**Reprova se:** o macOS bloquear a abertura do `.command` (ex.: "desenvolvedor não identificado"); a versão não bater com o macOS; ou algum dos três apps faltar.
 
-1. **2A, sem rede desde o início.** Wi-Fi desligado, sem cabo.
-2. **2B, Wi-Fi sem internet.** Hotspot do celular com os dados desligados. Cronometre do `>> Instalando` até ao fim.
-3. **2C, queda a meio.** Com Wi-Fi funcionando, desligue-o assim que aparecer `>> Instalando`.
+## Cenário 2: internet cai durante o download
 
-**Esperado:** código 0 e os cinco apps nos três casos, com o tempo de 2B parecido com o de 2A. A ativação da licença exige internet depois; avise o cliente.
+1. **2A.** Com a barra de progresso em cerca de 30 %, desligue o Wi-Fi.
+2. **2B.** Religue o Wi-Fi e rode o lançador de novo.
 
-**Reprova se:** qualquer caso falhar por falta de rede, ou 2B demorar muito mais que 2A (sinal de que o `installer` espera pela rede).
+**Esperado:** em 2A, `ERRO: o download falhou (a internet caiu?)...` e código 1 em poucos minutos, sem sobrar `/private/var/tmp/office.*`. Em 2B, `Pronto!` (código 0).
 
-## Cenário 3: energia
+**Reprova se:** 2A ficar parado mais de 5 min sem sair, ou 2B não concluir.
 
-1. **3A, na bateria.** Tire o carregador e rode.
-2. **3B, carregador removido a meio.** Com o carregador, comece a instalar e tire-o quando aparecer `>> Instalando`. Não mexa no Mac até ao fim.
-3. **3C, opcional e destrutivo, só em Mac de bancada.** Segure o botão de ligar durante a instalação; religue e rode de novo.
+## Cenário 3: ativação (o que decide)
 
-**Esperado:** 3A sai com `ERRO: ligue o carregador.` e código 1 antes de instalar. Em 3B a instalação termina (código 0) sem o Mac suspender. Em 3C o Mac liga e a nova execução recupera os cinco apps.
+1. Abra o Word e entre com a conta Microsoft da licença real.
+2. No **Word** e no **Excel**: criar um documento novo, escrever, **salvar**, fechar, reabrir, **editar** e salvar de novo.
 
-**Reprova se:** 3A começar a instalar, ou o Mac suspender em 3B. Se suspender, a correção é prefixar o `installer` com `caffeinate -i`.
+**Esperado:** tudo funciona, sem aviso de "funcionalidade reduzida" (o modo em que o Office só abre e imprime).
+
+**Reprova se:** qualquer passo de edição ou gravação for bloqueado. Sem este cenário aprovado, o Office não vai para venda.
+
+## Cenário 4: usuário leigo
+
+Uma pessoa sem conhecimento técnico recebe o pendrive e uma única instrução: "dê dois cliques em `Instalar Office.command` na KIT". Ninguém ajuda; o técnico só observa.
+
+**Anote:** cada dúvida, cada lugar onde a pessoa travou (achar a KIT, a senha que não aparece, mensagens) e quanto tempo levou.
+
+**Reprova se:** a pessoa precisar de ajuda para concluir. Cada dúvida vira ajuste de mensagem no lançador ou no script.
 
 ## Registro de aprovação
 
-| Cenário | Mac 1 (HD, USB 2.0) | Mac 2 (SSD) | `install.log` arquivado |
-| --- | --- | --- | --- |
-| 0A sem sudo |  |  |  |
-| 0B fora de /Volumes |  |  |  |
-| 0C sem .pkg |  |  |  |
-| 0D Terminal do Recovery |  |  |  |
-| 1A pendrive removido |  |  |  |
-| 1B recuperação |  |  |  |
-| 2A sem rede |  |  |  |
-| 2B Wi-Fi sem internet |  |  |  |
-| 2C queda de Wi-Fi |  |  |  |
-| 3A na bateria |  |  |  |
-| 3B carregador removido |  |  |  |
+| Cenário | Mac macOS ≤ 11 | Mac macOS 12 | Mac macOS 13 | Mac macOS 14+ |
+| --- | --- | --- | --- | --- |
+| 0A, 0C–0F travas | — |  |  |  |
+| 0B macOS sem suporte (código 2) |  | — | — | — |
+| 1 instalação (versão / tempo) | — |  |  |  |
+| 2A–2B queda de internet | — |  |  |  |
+| 3 ativação e edição | — |  |  |  |
+| 4 usuário leigo | — |  |  |  |
 
-Só libere o pendrive para venda com todas as linhas aprovadas nos dois Macs.
-
-## Decisões abertas (herdadas da auditoria anterior)
-
-- **Escopo de macOS.** Cada pendrive leva o Office de uma versão. Os MacBooks com T2 (2018–2019) rodam até Sequoia/Tahoe: defina que build do Office vai para cada macOS e diga na oferta qual cobre.
-- **Espaço no pendrive.** O `kit-multi-macos.sh` do briefing entrega o resto do pendrive à partição do Sequoia, e o `createinstallmedia` apaga a partição de destino. Crie uma partição própria (ex.: `KIT`) para `scripts/` e `assets/`.
-- **Licença da Microsoft.** Confirme os termos de redistribuição do instalador do Office antes de vender (não é parecer jurídico).
+Em cada célula: ✅/❌, data e observação. Só libere o Office para venda com todas as linhas aprovadas nos macOS que houver na bancada (pelo menos um).

@@ -1,7 +1,7 @@
 #!/bin/bash
 # build_pendrive.sh - monta o pendrive multi-macOS + partição KIT (rodar no Mac de bancada)
-# A KIT leva só o que o cliente usa: scripts/install_office.sh, assets/ e VERSION
-# (este script não vai para o pendrive).
+# A KIT leva só o que o cliente usa: "Instalar Office.command" (na raiz),
+# scripts/install_office.sh e VERSION (este script não vai para o pendrive).
 # Uso: sudo bash scripts/build_pendrive.sh diskN [--dry-run]
 #      (descubra o diskN com: diskutil list external)
 set -eu
@@ -90,10 +90,8 @@ printf 'Faltam (partição fica vazia):\n%s' "${PULAR:-  nenhum
 }"
 
 # Origem da partição KIT
-[ -f "$REPO/scripts/install_office.sh" ] && [ -d "$REPO/assets" ] ||
-  die "scripts/install_office.sh ou assets/ não encontrados em $REPO."
-set -- "$REPO/assets/office"/[!.]*.pkg
-[ -e "$1" ] || echo "AVISO: nenhum .pkg em $REPO/assets/office; a KIT vai sem o Office."
+[ -f "$REPO/scripts/install_office.sh" ] && [ -f "$REPO/scripts/Instalar Office.command" ] ||
+  die "scripts/install_office.sh ou \"scripts/Instalar Office.command\" não encontrados em $REPO."
 
 # Confirmação
 diskutil list "$DISK"
@@ -120,11 +118,15 @@ for item in "${INST[@]}"; do
     die "createinstallmedia falhou para $ver."
 done
 
-echo ">> Copiando install_office.sh e assets/ para /Volumes/KIT"
+echo ">> Copiando o lançador e install_office.sh para /Volumes/KIT"
 confere_volume KIT
 run ditto "$REPO/scripts/install_office.sh" /Volumes/KIT/scripts/install_office.sh ||
   die "ditto de install_office.sh falhou."
-run ditto "$REPO/assets" /Volumes/KIT/assets || die "ditto de assets/ falhou."
+run ditto "$REPO/scripts/Instalar Office.command" "/Volumes/KIT/Instalar Office.command" ||
+  die "ditto do Instalar Office.command falhou."
+# o Windows perde o bit de execução; sem ele o duplo clique não abre
+run chmod 755 /Volumes/KIT/scripts/install_office.sh "/Volumes/KIT/Instalar Office.command" ||
+  die "chmod na KIT falhou."
 
 REV="sem-git"
 if command -v git >/dev/null 2>&1; then
