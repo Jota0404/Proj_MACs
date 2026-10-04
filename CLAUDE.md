@@ -11,6 +11,7 @@ Auto-MACs/
 ├── .gitignore                 # *.pkg, .DS_Store, ._*
 ├── .gitattributes             # *.sh e *.command sempre com LF
 ├── docs/
+│   ├── visao_geral.md         # Onboarding: visão geral do projeto para novos colaboradores
 │   ├── briefing.md            # Briefing técnico (Recovery/Wi-Fi, bancada, pendrive)
 │   ├── decisoes.md            # ADRs (Office online, cliente leigo, pendrive único, licença, piloto)
 │   ├── guia_cliente.md        # Guia passo a passo para o cliente leigo (com marcadores [FOTO-NN])
