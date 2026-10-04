@@ -12,6 +12,7 @@ Auto-MACs/
 ├── docs/
 │   ├── briefing.md            # Briefing técnico (Recovery/Wi-Fi, bancada, pendrive)
 │   ├── plano_bancada.md       # Testes em Mac real do install_office.sh
+│   ├── plano_bancada_pendrive.md  # Testes em Mac real do build_pendrive.sh (travas, gravação, boot, offline)
 │   └── archive/               # Históricos (instalar_office.sh, auditoria v2) — não reutilizar
 ├── scripts/
 │   ├── build_pendrive.sh      # Oficial, Mac de bancada: monta o pendrive multi-macOS + partição KIT
@@ -20,7 +21,7 @@ Auto-MACs/
     └── office/                # Pacotes .pkg do Office, uma versão de macOS por pendrive (não versionados)
 ```
 
-**Estado atual:** dois scripts oficiais — `build_pendrive.sh` (bancada) e `install_office.sh` (Mac do cliente) — e **nenhum validado em Mac real**. Prioridade atual: validar o pendrive de macOS (`build_pendrive.sh --dry-run`, depois gravação real e boot em Macs de gerações diferentes). Office congelado até a bancada (ver `docs/plano_bancada.md`).
+**Estado atual:** dois scripts oficiais — `build_pendrive.sh` (bancada) e `install_office.sh` (Mac do cliente) — e **nenhum validado em Mac real**. Prioridade atual: validar o pendrive de macOS (ver `docs/plano_bancada_pendrive.md`). Office congelado até a bancada (ver `docs/plano_bancada.md`).
 
 # Regras de Desenvolvimento e Segurança (Bash)
 1. **Guard Clauses Obrigatórias:** Todos os scripts devem verificar antes de executar ações críticas:
