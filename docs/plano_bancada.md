@@ -2,6 +2,8 @@
 
 Oct 3, 2026 · @Jota
 
+> No piloto (v0.1), este plano é executado nos Macs do cliente, seguindo o [`docs/roteiro_piloto.md`](roteiro_piloto.md).
+
 Valida a instalação do Office **em Mac real e Bash 3.2**, o que ainda não foi feito. O script não leva Office no pendrive: baixa o instalador oficial da Microsoft conforme o macOS e confere a assinatura (`docs/decisoes.md`, ADR-001). O cliente roda só o lançador (ADR-002). Fazer depois do `docs/plano_bancada_pendrive.md`.
 
 ## Contrato do script

@@ -40,3 +40,10 @@ Formato curto: decisão / motivo / rejeitado / consequência. Uma decisão nova 
 - **Motivo:** o kit é produto comercial.
 - **Rejeitado:** licença aberta.
 - **Consequência:** a visibilidade privada é configurada pelo Jota no GitHub; o repositório só registra o `LICENSE`.
+
+## ADR-005 — Piloto assistido nos Macs do cliente
+
+- **Decisão:** sem Mac de bancada próprio na v0.1. O Mac de montagem é um Mac do cliente (se nenhum funcionar, recuperado pela Rota B do briefing). O pendrive do piloto leva só os instaladores dos modelos do cliente. Depois de aprovado, o pendrive vira imagem mestra copiada no Windows.
+- **Motivo:** `createinstallmedia` e `diskutil` só existem no macOS; os Macs do cliente são o próprio hardware-alvo.
+- **Rejeitado:** Mac na nuvem (sem USB); VM/Hackintosh (licença da Apple); comprar um Mac antes da primeira venda.
+- **Consequência:** os planos de bancada passam a ser executados no piloto (`docs/roteiro_piloto.md`); "Mac de bancada" passa a "Mac de montagem".

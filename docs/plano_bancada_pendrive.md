@@ -2,6 +2,8 @@
 
 Oct 3, 2026 · @Jota
 
+> No piloto (v0.1), este plano é executado nos Macs do cliente, seguindo o [`docs/roteiro_piloto.md`](roteiro_piloto.md).
+
 Valida o pendrive multi-macOS **em Mac real e Bash 3.2**, o que ainda não foi feito: travas, gravação, boot e instalação offline. É a prioridade atual; o plano do Office (`docs/plano_bancada.md`) vem a seguir.
 
 ## Contrato do script
@@ -15,7 +17,7 @@ Travas, por ordem e **antes de apagar qualquer coisa**: `sudo` (exceto `--dry-ru
 
 ## Antes de começar
 
-1. **Mac de bancada:** anote modelo (`sysctl hw.model`) e macOS (`sw_vers`). O briefing recomenda um MacBook Pro 13" 2018 ou 2019.
+1. **Mac de montagem:** anote modelo (`sysctl hw.model`) e macOS (`sw_vers`). O briefing recomenda um MacBook Pro 13" 2018 ou 2019.
 2. **Pendrive:** 128 GB, USB 3.0, ligado direto na porta (sem hub). Tudo nele será apagado.
 3. **Instaladores** em `/Applications`, baixados com os comandos do briefing (seção 3):
    - `softwareupdate --list-full-installers`
@@ -74,7 +76,7 @@ Matriz mínima:
 
 ## Registro de aprovação
 
-| Cenário | Mac de bancada | Mac 1 (2010–2012) | Mac 2 (2013–2017) | Mac 3 (T2) |
+| Cenário | Mac de montagem | Mac 1 (2010–2012) | Mac 2 (2013–2017) | Mac 3 (T2) |
 | --- | --- | --- | --- | --- |
 | 0A–0E travas |  | — | — | — |
 | 1 gravação (SEQ ≥ 17 GB) |  | — | — | — |
