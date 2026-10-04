@@ -1,7 +1,7 @@
 # Auto-MACs
 
 Kit de formatação offline para MacBooks Intel (≤2019): um pendrive com os instaladores
-do macOS (High Sierra → Sequoia) e uma partição `KIT` com o instalador do Office para o cliente.
+do macOS (High Sierra → Sequoia) e uma partição `KIT` com o lançador e o script que baixa o Office da Microsoft na hora.
 
 | Script | Quem usa | Como |
 | --- | --- | --- |

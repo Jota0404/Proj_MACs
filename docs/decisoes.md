@@ -47,3 +47,13 @@ Formato curto: decisão / motivo / rejeitado / consequência. Uma decisão nova 
 - **Motivo:** `createinstallmedia` e `diskutil` só existem no macOS; os Macs do cliente são o próprio hardware-alvo.
 - **Rejeitado:** Mac na nuvem (sem USB); VM/Hackintosh (licença da Apple); comprar um Mac antes da primeira venda.
 - **Consequência:** os planos de bancada passam a ser executados no piloto (`docs/roteiro_piloto.md`); "Mac de bancada" passa a "Mac de montagem".
+
+## ADR-006 — Escopo e manutenção da v0.1
+
+- **Decisão A:** o macOS Tahoe 26 fica fora da v0.1. O MacBook Pro 16" 2019, único MacBook Intel que o aceita, recebe Sequoia.
+  - **Motivo:** um só modelo se beneficia, e o Mac de montagem típico (MacBook Pro 13" 2018/2019) não baixa o Tahoe.
+  - **Rejeitado:** partição `TAHOE` no pendrive.
+  - **Consequência:** reavaliar se aparecer demanda real.
+- **Decisão B:** o mapa de URLs do Office (`scripts/install_office.sh`, ADR-001) é revisado a cada nova imagem mestra ou versão do kit, e sempre que um cliente relatar "o instalador da Microsoft não respondeu".
+  - **Motivo:** as URLs estão fixas no script e envelhecem (ADR-001); a trava que testa a URL só detecta o problema, não o corrige.
+  - **Fonte:** [update history](https://learn.microsoft.com/officeupdates/update-history-office-for-mac).
