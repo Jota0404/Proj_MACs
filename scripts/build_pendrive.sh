@@ -1,5 +1,7 @@
 #!/bin/bash
 # build_pendrive.sh - monta o pendrive multi-macOS + partição KIT (rodar no Mac de bancada)
+# A KIT leva só o que o cliente usa: scripts/install_office.sh, assets/ e VERSION
+# (este script não vai para o pendrive).
 # Uso: sudo bash scripts/build_pendrive.sh diskN [--dry-run]
 #      (descubra o diskN com: diskutil list external)
 set -eu
@@ -88,8 +90,8 @@ printf 'Faltam (partição fica vazia):\n%s' "${PULAR:-  nenhum
 }"
 
 # Origem da partição KIT
-[ -d "$REPO/scripts" ] && [ -d "$REPO/assets" ] ||
-  die "pastas scripts/ e assets/ não encontradas em $REPO."
+[ -f "$REPO/scripts/install_office.sh" ] && [ -d "$REPO/assets" ] ||
+  die "scripts/install_office.sh ou assets/ não encontrados em $REPO."
 set -- "$REPO/assets/office"/[!.]*.pkg
 [ -e "$1" ] || echo "AVISO: nenhum .pkg em $REPO/assets/office; a KIT vai sem o Office."
 
@@ -118,9 +120,10 @@ for item in "${INST[@]}"; do
     die "createinstallmedia falhou para $ver."
 done
 
-echo ">> Copiando scripts/ e assets/ para /Volumes/KIT"
+echo ">> Copiando install_office.sh e assets/ para /Volumes/KIT"
 confere_volume KIT
-run ditto "$REPO/scripts" /Volumes/KIT/scripts || die "ditto de scripts/ falhou."
+run ditto "$REPO/scripts/install_office.sh" /Volumes/KIT/scripts/install_office.sh ||
+  die "ditto de install_office.sh falhou."
 run ditto "$REPO/assets" /Volumes/KIT/assets || die "ditto de assets/ falhou."
 
 REV="sem-git"

@@ -11,4 +11,5 @@ do macOS (High Sierra → Sequoia) e uma partição `KIT` com scripts e pacotes 
 Nenhum dos dois foi validado em Mac real ainda.
 
 - Briefing técnico: [docs/briefing.md](docs/briefing.md)
-- Plano de testes em bancada: [docs/plano_bancada.md](docs/plano_bancada.md)
+- Plano de bancada do pendrive (prioridade): [docs/plano_bancada_pendrive.md](docs/plano_bancada_pendrive.md)
+- Plano de bancada do Office: [docs/plano_bancada.md](docs/plano_bancada.md)
