@@ -12,7 +12,7 @@ Valida a instalação do Office **em Mac real e Bash 3.2**, o que ainda não foi
 | 1 | Qualquer trava ou falha; a causa e o que fazer estão na linha `ERRO:` | `Algo deu errado: leia a mensagem ERRO acima e tente de novo.` |
 | 2 | macOS 11 ou anterior: o Office atual não roda | `Este Mac é antigo demais para o Office atual.` |
 
-Travas, por ordem: `sudo` → macOS (10.x/11 = código 2; 12 → 16.88, 13 → 16.101, 14+ → 16.113.3) → carregador → ano do relógio ≥ 2026 → 10 GB livres em `/` → internet. Depois: download → assinatura `Developer ID Installer: Microsoft Corporation` → `installer` → Word, Excel e PowerPoint em `/Applications`.
+Travas, por ordem: `sudo` → macOS (10.x/11 = código 2; 12 → 16.88, 13 → 16.101, 14+ → 16.113.3) → carregador → ano do relógio ≥ 2026 → 15 GB livres em `/` → internet. Depois: download → assinatura `Developer ID Installer: Microsoft Corporation` → `installer` → Word, Excel e PowerPoint em `/Applications`.
 
 O script não tem log próprio: o detalhe da instalação fica em `/var/log/install.log`.
 
@@ -35,7 +35,8 @@ Comando padrão: dois cliques em `Instalar Office.command` na KIT.
 | 0C | Carregador desligado | `ERRO: ligue o carregador na tomada e rode de novo.` · código 1 |
 | 0D | Ajustes > Data e Hora: desligar o automático e pôr 01/01/2001 (**voltar a data depois**) | `ERRO: o relógio do Mac está no ano 2001. Acerte a data em...` · código 1 |
 | 0E | Wi-Fi desligado e sem cabo | `ERRO: sem acesso à internet. Conecte o Mac à internet (Wi-Fi ou cabo)...` · código 1 |
-| 0F | Opcional, só se houver um Mac com menos de 10 GB livres | `ERRO: o Mac tem menos de 10 GB livres...` · código 1 |
+| 0F | Opcional, só se houver um Mac com menos de 15 GB livres | `ERRO: o Mac tem menos de 15 GB livres...` · código 1 |
+| 0G | Rede com portal cativo (Wi-Fi de hotel, café ou empresa) conectada **sem** fazer o login | `ERRO: a rede pede login (Wi-Fi de hotel, empresa ou portal). Use outra rede ou o hotspot do celular e rode de novo.` · código 1 |
 
 **Reprova se:** qualquer caso começar o download (`>> Baixando`), ou a mensagem não disser o que fazer.
 
@@ -77,7 +78,7 @@ Uma pessoa sem conhecimento técnico recebe o pendrive e uma única instrução:
 
 | Cenário | Mac macOS ≤ 11 | Mac macOS 12 | Mac macOS 13 | Mac macOS 14+ |
 | --- | --- | --- | --- | --- |
-| 0A, 0C–0F travas | — |  |  |  |
+| 0A, 0C–0G travas | — |  |  |  |
 | 0B macOS sem suporte (código 2) |  | — | — | — |
 | 1 instalação (versão / tempo) | — |  |  |  |
 | 2A–2B queda de internet | — |  |  |  |

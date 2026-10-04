@@ -120,9 +120,9 @@ done
 
 echo ">> Copiando o lançador e install_office.sh para /Volumes/KIT"
 confere_volume KIT
-run ditto "$REPO/scripts/install_office.sh" /Volumes/KIT/scripts/install_office.sh ||
+run ditto --noqtn "$REPO/scripts/install_office.sh" /Volumes/KIT/scripts/install_office.sh ||
   die "ditto de install_office.sh falhou."
-run ditto "$REPO/scripts/Instalar Office.command" "/Volumes/KIT/Instalar Office.command" ||
+run ditto --noqtn "$REPO/scripts/Instalar Office.command" "/Volumes/KIT/Instalar Office.command" ||
   die "ditto do Instalar Office.command falhou."
 # o Windows perde o bit de execução; sem ele o duplo clique não abre
 run chmod 755 /Volumes/KIT/scripts/install_office.sh "/Volumes/KIT/Instalar Office.command" ||

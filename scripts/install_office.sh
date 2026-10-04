@@ -11,7 +11,7 @@ set -eu
 URL_MACOS12="https://officecdn.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_365_and_Office_16.88.24081116_Installer.pkg"
 URL_MACOS13="https://officecdn.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_365_and_Office_16.101.25091314_Installer.pkg"
 URL_MACOS14="https://res.public.onecdn.static.microsoft/mro1cdnstorage/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_365_and_Office_16.113.26092714_Installer.pkg"
-MIN_FREE_GB=10
+MIN_FREE_GB=15  # download de ~3 GB mais o Office instalado
 
 die() { echo "ERRO: $*" >&2; exit 1; }
 
@@ -48,9 +48,16 @@ case "$FREE_KB" in ''|*[!0-9]*) die "não foi possível medir o espaço livre do
 [ "$FREE_KB" -ge $((MIN_FREE_GB * 1024 * 1024)) ] ||
   die "o Mac tem menos de ${MIN_FREE_GB} GB livres. Apague arquivos que não usa, esvazie o Lixo e rode de novo."
 
-# f. internet: HEAD no próprio instalador (a raiz dos CDNs responde 400)
-curl -sfI --max-time 15 -o /dev/null "$URL" ||
+# f. internet: (a) conectividade, separando portal cativo (página da Apple sem "Success")
+PROBE="$(curl -sf --max-time 15 http://captive.apple.com/hotspot-detect.html)" ||
   die "sem acesso à internet. Conecte o Mac à internet (Wi-Fi ou cabo) e rode de novo."
+case "$PROBE" in
+  *Success*) ;;
+  *) die "a rede pede login (Wi-Fi de hotel, empresa ou portal). Use outra rede ou o hotspot do celular e rode de novo." ;;
+esac
+# (b) HEAD no próprio instalador (a raiz dos CDNs responde 400)
+curl -sfI --max-time 15 -o /dev/null "$URL" ||
+  die "a internet funciona, mas o instalador da Microsoft não respondeu (pode ter mudado de endereço). Tente mais tarde; se repetir, fale com o suporte."
 
 TMP="$(mktemp -d /private/var/tmp/office.XXXXXX)" || die "não foi possível criar a pasta temporária. Reinicie o Mac e rode de novo."
 trap 'rm -rf "${TMP:?}"' EXIT
