@@ -1,0 +1,4 @@
+assets/office/*
+!assets/office/.gitkeep
+.DS_Store
+._*

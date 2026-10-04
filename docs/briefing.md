@@ -137,42 +137,7 @@ High Sierra e Mojave: pelos links da App Store na página da Apple. Se o `softwa
 
 ### Script: pendrive multi-macOS
 
-```bash
-#!/bin/bash
-# kit-multi-macos.sh — rodar no Mac de bancada: sudo ./kit-multi-macos.sh disk4
-set -e
-DISK="$1"
-[ -z "$DISK" ] && { echo "Uso: sudo $0 diskN  (veja com: diskutil list external)"; exit 1; }
-diskutil list "$DISK"
-read -p "TODO o conteúdo de /dev/$DISK será APAGADO. Digite SIM: " OK
-[ "$OK" = "SIM" ] || exit 1
-
-# 1) GUID + Mac OS Extended (Journaled), uma partição por versão
-diskutil partitionDisk "$DISK" GPT \
-  JHFS+ HS 8G  JHFS+ MOJ 8G  JHFS+ CAT 10G \
-  JHFS+ BSUR 15G  JHFS+ MONT 15G  JHFS+ VEN 15G \
-  JHFS+ SON 16G  JHFS+ SEQ R
-
-# 2) grava cada instalador presente em /Applications na sua partição
-grava() {
-  APP="/Applications/Install macOS $1.app"
-  if [ -d "$APP" ]; then
-    echo ">> Gravando $1 em /Volumes/$2"
-    "$APP/Contents/Resources/createinstallmedia" --volume "/Volumes/$2" --nointeraction
-  else
-    echo "-- Pulando $1: instalador não encontrado"
-  fi
-}
-grava "High Sierra" HS
-grava "Mojave" MOJ
-grava "Catalina" CAT
-grava "Big Sur" BSUR
-grava "Monterey" MONT
-grava "Ventura" VEN
-grava "Sonoma" SON
-grava "Sequoia" SEQ
-echo "Pronto. Cada partição agora se chama 'Install macOS <versão>'."
-```
+O script oficial está em [`scripts/build_pendrive.sh`](../scripts/build_pendrive.sh) (uso: `sudo bash scripts/build_pendrive.sh diskN [--dry-run]`).
 
 Teste o pendrive em pelo menos dois Macs de gerações diferentes antes de vender ou usar em cliente.
 
