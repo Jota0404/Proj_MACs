@@ -5,11 +5,11 @@
 Eu, ______________________________________, CPF ___________________, autorizo
 ______________________________________ (E.C.H.O Tech) a trabalhar nos Macs abaixo, que são meus:
 
-| Mac | Modelo / ano | Número de série | Apagar e reinstalar? |
-| --- | --- | --- | --- |
-| A |  |  | ☐ sim |
-| B |  |  | ☐ sim |
-| C |  |  | ☐ sim |
+| Mac | Modelo / ano | Número de série | Resultado do Apple Diagnostics | Apagar e reinstalar? |
+| --- | --- | --- | --- | --- |
+| A |  |  |  | ☐ sim |
+| B |  |  |  | ☐ sim |
+| C |  |  |  | ☐ sim |
 
 Declaro que:
 
@@ -18,6 +18,7 @@ Declaro que:
 3. Sei que é um **piloto**: o kit está em teste e o processo pode levar mais tempo ou precisar de outra visita.
 4. O Microsoft Office, se instalado, usa **a minha própria licença** e a minha conta Microsoft.
 5. Sei que **nenhum Bloqueio de Ativação (Apple ID) ou senha de firmware será contornado**. Mac com esses bloqueios fica fora do piloto até eu os remover.
+6. Defeitos de hardware já existentes (disco, memória, bateria, teclado), incluindo os apontados no Apple Diagnostics, não são causados pelo serviço e podem impedir a instalação.
 
 Local e data: ______________________________, ____/____/______
 

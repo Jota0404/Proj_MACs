@@ -33,10 +33,11 @@ Preencha com o cliente, por mensagem ou por telefone. Para o macOS-alvo, use a t
 - [ ] **Termo assinado** antes de tocar em qualquer disco.
 - [ ] Escolher o **Mac mais novo que funcione**. Ele monta o pendrive, e o `softwareupdate` só baixa as versões que esse Mac suporta: quanto mais novo, mais versões.
 - [ ] **Se nenhum Mac funcionar:** recuperar um pela **Rota B do briefing** (Fase 3, passos 13–16):
-  1. Cabo de rede ou hotspot do celular em 2,4 GHz/WPA2. Nunca rede de hotel, empresa ou WPA3.
-  2. Ligar com **Shift + Option + Cmd + R** primeiro (sistema de fábrica, mais compatível); se falhar, **Option + Cmd + R**.
-  3. Antes de "Reinstalar macOS": Utilitários → Terminal → acertar a data (`date MMDDhhmmAAAA`).
-  4. Erro -2003F ou servidor não contatado: trocar de rede e tentar a outra combinação de teclas.
+  1. **Antes de reinstalar:** Apple Diagnostics: ligar segurando **D** (**Option + D** se não abrir), anotar o código ou "sem problemas" no termo. Erro de disco ou memória: o Mac sai do piloto ou segue só com o cliente ciente e de acordo, anotado no termo.
+  2. Cabo de rede ou hotspot do celular em 2,4 GHz/WPA2. Nunca rede de hotel, empresa ou WPA3.
+  3. Ligar com **Shift + Option + Cmd + R** primeiro (sistema de fábrica, mais compatível); se falhar, **Option + Cmd + R**.
+  4. Antes de "Reinstalar macOS": Utilitários → Terminal → acertar a data (`date MMDDhhmmAAAA`).
+  5. Erro -2003F ou servidor não contatado: trocar de rede e tentar a outra combinação de teclas.
 
 **Critério de sucesso:** o Mac arranca no macOS com uma conta de administrador, tem internet e o espaço livre da Fase 2. O ideal é macOS 10.15 (Catalina) ou mais novo, porque o `softwareupdate --fetch-full-installer` não existe antes disso. Num sistema mais antigo, atualizar pela Atualização de Software ou baixar pelos links da App Store.
 
@@ -61,17 +62,18 @@ Comando: `cd ~/Proj_MACs && sudo bash scripts/build_pendrive.sh diskN` (o `diskN
 
 Para cada Mac marcado "No piloto? sim". O Mac de montagem vai **por último** (só ele pode refazer o pendrive).
 
+- [ ] **Antes de apagar qualquer disco:** Apple Diagnostics: ligar segurando **D** (**Option + D** se não abrir), anotar o código ou "sem problemas" no termo. Erro de disco ou memória: o Mac sai do piloto ou segue só com o cliente ciente e de acordo, anotado no termo.
 - [ ] `docs/plano_bancada_pendrive.md` → **Cenário 2** (boot) e **Cenário 3** (instalação offline).
 - [ ] Seguir **o `docs/guia_cliente.md` ao pé da letra**, como se fosse o cliente. Tudo o que não bater com a tela vai para as notas.
 - [ ] Tirar as **`[FOTO-NN]`** do guia (no celular, nome do arquivo = número da foto).
 - [ ] Conferir os itens marcados **"A CONFIRMAR NA BANCADA"** no guia e anotar o que aparece de verdade.
 - [ ] Mac com T2 (2018–2019): passo 3 do guia **antes** de apagar o disco.
 
-| Mac | Boot pelo pendrive | Instalação offline | Tempo total | Pedidos de rede | Fotos tiradas |
-| --- | --- | --- | --- | --- | --- |
-| A |  |  |  |  |  |
-| B |  |  |  |  |  |
-| C |  |  |  |  |  |
+| Mac | Apple Diagnostics | Boot pelo pendrive | Instalação offline | Tempo total | Pedidos de rede | Fotos tiradas |
+| --- | --- | --- | --- | --- | --- | --- |
+| A |  |  |  |  |  |  |
+| B |  |  |  |  |  |  |
+| C |  |  |  |  |  |  |
 
 ## Fase 4 — Office (Macs com macOS 12+)
 

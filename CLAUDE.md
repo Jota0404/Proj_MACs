@@ -34,6 +34,7 @@ Auto-MACs/
    - Existência física dos ficheiros `.pkg` antes de iniciar comandos de instalação (`installer`).
 2. **Tratamento de Erros:** Utilizar sempre `set -e` e `set -u` no topo dos scripts. Proteger variáveis de caminho contra valores nulos (ex: `"${VAR:?mensagem}"`) e citar sempre as expansões (`"$VAR"`).
 3. **Validação de Sintaxe:** Antes de finalizar qualquer script, executar testes estáticos de sintaxe (ex: `bash -n`; `shellcheck` quando disponível).
+4. **Atribuição:** todo commit gerado com IA termina com a linha Co-Authored-By padrão; todo PR, com o rodapé padrão do Claude Code.
 
 ## Notas de Compatibilidade
 - **Bash 3.2:** macOS legado traz Bash 3.2 por omissão — evitar funcionalidades de Bash 4+ (arrays associativos, `mapfile`/`readarray`, `${var,,}`, `&>>`).
