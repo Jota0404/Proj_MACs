@@ -12,17 +12,20 @@ Auto-MACs/
 ├── .gitattributes             # *.sh e *.command sempre com LF
 ├── docs/
 │   ├── briefing.md            # Briefing técnico (Recovery/Wi-Fi, bancada, pendrive)
-│   ├── decisoes.md            # ADRs (Office online, cliente leigo, pendrive único, licença)
+│   ├── decisoes.md            # ADRs (Office online, cliente leigo, pendrive único, licença, piloto)
+│   ├── guia_cliente.md        # Guia passo a passo para o cliente leigo (com marcadores [FOTO-NN])
+│   ├── roteiro_piloto.md      # Checklist do piloto nos Macs do cliente (ADR-005)
+│   ├── termo_piloto.md        # Termo de autorização do piloto
 │   ├── plano_bancada_pendrive.md  # Testes em Mac real do build_pendrive.sh (travas, gravação, boot, offline)
 │   ├── plano_bancada.md       # Testes em Mac real do Office (travas, instalação, ativação, leigo)
 │   └── archive/               # Históricos (instalar_office.sh, auditoria v2) — não reutilizar
 └── scripts/
-    ├── build_pendrive.sh      # Bancada: monta o pendrive multi-macOS + partição KIT
+    ├── build_pendrive.sh      # Mac de montagem: monta o pendrive multi-macOS + partição KIT
     ├── Instalar Office.command  # Cliente: lançador de dois cliques (vai para a raiz da KIT)
     └── install_office.sh      # Cliente: baixa da Microsoft e instala o Office conforme o macOS
 ```
 
-**Estado atual:** scripts oficiais `build_pendrive.sh` (bancada) e `install_office.sh` + `Instalar Office.command` (Mac do cliente), **nenhum validado em Mac real**. Prioridade: validar o pendrive de macOS (`docs/plano_bancada_pendrive.md`); depois o Office (`docs/plano_bancada.md`, o Cenário 3 de ativação decide). O Office não é distribuído no kit: é baixado da Microsoft e só roda em macOS 12+ (`docs/decisoes.md`).
+**Estado atual:** scripts oficiais `build_pendrive.sh` (Mac de montagem) e `install_office.sh` + `Instalar Office.command` (Mac do cliente), **nenhum validado em Mac real**. Prioridade: o piloto nos Macs do cliente (`docs/roteiro_piloto.md`, ADR-005), que executa os planos: primeiro o pendrive de macOS (`docs/plano_bancada_pendrive.md`), depois o Office (`docs/plano_bancada.md`, o Cenário 3 de ativação decide). O Office não é distribuído no kit: é baixado da Microsoft e só roda em macOS 12+ (`docs/decisoes.md`).
 
 # Regras de Desenvolvimento e Segurança (Bash)
 1. **Guard Clauses Obrigatórias:** Todos os scripts devem verificar antes de executar ações críticas:
