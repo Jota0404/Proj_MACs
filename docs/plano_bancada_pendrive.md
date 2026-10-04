@@ -2,7 +2,7 @@
 
 Oct 3, 2026 · @Jota
 
-Valida o pendrive multi-macOS **em Mac real e Bash 3.2**, o que ainda não foi feito: travas, gravação, boot e instalação offline. É a prioridade atual; o Office (`docs/plano_bancada.md`) fica congelado até aqui estar aprovado.
+Valida o pendrive multi-macOS **em Mac real e Bash 3.2**, o que ainda não foi feito: travas, gravação, boot e instalação offline. É a prioridade atual; o plano do Office (`docs/plano_bancada.md`) vem a seguir.
 
 ## Contrato do script
 
@@ -30,7 +30,7 @@ Use sempre `--dry-run` em 0A–0D: as travas são as mesmas e, se alguma falhar,
 
 | # | Como provocar | Esperado |
 | --- | --- | --- |
-| 0A | `bash scripts/build_pendrive.sh diskN --dry-run` com o pendrive; digitar `SIM` | Lista "Serão gravados"/"Faltam" igual à anotação do passo 4; `diskutil list` do pendrive; linhas `[dry-run] diskutil partitionDisk ...`, `createinstallmedia ...` e `ditto ...`; nada é apagado · código 0 |
+| 0A | `bash scripts/build_pendrive.sh diskN --dry-run` com o pendrive; digitar `SIM` | Lista "Serão gravados"/"Faltam" igual à anotação do passo 4; `diskutil list` do pendrive; linhas `[dry-run] diskutil partitionDisk ...`, `createinstallmedia ...`, dois `ditto ...` e `chmod 755 ...`; nada é apagado · código 0 |
 | 0B | `... disk0 --dry-run` | `ERRO: disk0 não é externo (...)` · código 1 |
 | 0C | `... disk4s1 --dry-run` (qualquer `diskNsM`) | `ERRO: argumento inválido 'disk4s1'. uso: ...` · código 1 |
 | 0D | HD/SSD externo < 120 GB: `... diskN --dry-run` | `ERRO: diskN tem <N> bytes; mínimo 120000000000.` · código 1 |
@@ -41,9 +41,9 @@ Use sempre `--dry-run` em 0A–0D: as travas são as mesmas e, se alguma falhar,
 1. `sudo bash scripts/build_pendrive.sh diskN`, digitar `SIM`. Cronometre do `SIM` até ao resumo. Esperado: código 0.
 2. `diskutil list diskN`: registre o tamanho de cada partição. As gravadas aparecem como `Install macOS <versão>`; `KIT` mantém o nome.
 3. `cat /Volumes/KIT/VERSION`: data de hoje, `git:` com o commit (ou `sem-git`), "gravados" igual ao que foi pedido e "pulados" igual à anotação do passo 4.
-4. `ls -A /Volumes/KIT/scripts`: **só** `install_office.sh`. `ls /Volumes/KIT/assets/office` com os `.pkg` (se houver).
+4. `ls /Volumes/KIT /Volumes/KIT/scripts`: a KIT tem **exatamente** `Instalar Office.command`, `scripts/install_office.sh` e `VERSION` (sem `assets/`; as pastas ocultas do macOS, como `.fseventsd`, não contam). `ls -l` mostra `-rwxr-xr-x` no `.command` e no `install_office.sh`.
 
-**Reprova se:** a partição do Sequoia (`SEQ`/`Install macOS Sequoia`) tiver **menos de 17 GB**; algum instalador encontrado não foi gravado; `KIT/scripts` tiver qualquer outro ficheiro; ou o `VERSION` não bater com o resumo.
+**Reprova se:** a partição do Sequoia (`SEQ`/`Install macOS Sequoia`) tiver **menos de 17 GB**; algum instalador encontrado não foi gravado; a KIT tiver qualquer coisa além desses três ou um deles sem permissão de execução; ou o `VERSION` não bater com o resumo.
 
 ## Cenário 2: boot
 
