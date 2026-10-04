@@ -1,5 +1,5 @@
 #!/bin/bash
-# build_pendrive.sh - monta o pendrive multi-macOS + partição KIT (rodar no Mac de bancada)
+# build_pendrive.sh - monta o pendrive multi-macOS + partição KIT (rodar no Mac de montagem)
 # A KIT leva só o que o cliente usa: "Instalar Office.command" (na raiz),
 # scripts/install_office.sh e VERSION (este script não vai para o pendrive).
 # Uso: sudo bash scripts/build_pendrive.sh diskN [--dry-run]

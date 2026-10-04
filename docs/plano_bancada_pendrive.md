@@ -13,7 +13,7 @@ Valida o pendrive multi-macOS **em Mac real e Bash 3.2**, o que ainda não foi f
 | 0 | Instaladores gravados, `KIT` copiada, resumo impresso (ou, em `--dry-run`, só os comandos impressos) | Conferir o resumo e o `VERSION` |
 | 1 | Qualquer trava ou falha; a causa está na linha `ERRO:` do console | Corrigir o que a mensagem diz e rodar de novo |
 
-Travas, por ordem e **antes de apagar qualquer coisa**: `sudo` (exceto `--dry-run`) → argumento `diskN` → disco externo → não é o disco de `/` → ≥ 120 GB → pelo menos um instalador em `/Applications` → digitar `SIM`.
+Travas, por ordem e **antes de apagar qualquer coisa**: `sudo` (exceto `--dry-run`) → argumento `diskN` → disco externo → não é o disco de `/` → ≥ 120 GB → pelo menos um instalador em `/Applications` → `scripts/install_office.sh` e `scripts/Instalar Office.command` presentes no repositório (origem da KIT) → digitar `SIM`.
 
 ## Antes de começar
 

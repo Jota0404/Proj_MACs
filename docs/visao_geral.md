@@ -108,7 +108,7 @@ Criado por `diskutil partitionDisk ... GPT` em `scripts/build_pendrive.sh:104-10
 
 **Por que o `build_pendrive.sh` não vai para o pendrive:** ele é ferramenta da bancada e apaga discos; o cliente não roda Terminal ([ADR-002](decisoes.md); cabeçalho em `scripts/build_pendrive.sh:3-4`).
 
-O macOS Tahoe 26 não está no pendrive: a lista de versões vai até Sequoia (`scripts/build_pendrive.sh:12-13`), embora o briefing aponte Tahoe como máximo do MacBook Pro 16" 2019. O guia manda instalar Sequoia em todo MacBook Pro 2018–2019. Se isso é intencional: não documentado no repositório.
+O macOS Tahoe 26 não está no pendrive: a lista de versões vai até Sequoia (`scripts/build_pendrive.sh:12-13`), embora o briefing aponte Tahoe como máximo do MacBook Pro 16" 2019. O guia manda instalar Sequoia em todo MacBook Pro 2018–2019. A exclusão é intencional na v0.1 ([ADR-006](decisoes.md), decisão A).
 
 ## 6. Os scripts, um a um
 
@@ -132,7 +132,7 @@ Travas, na ordem do código (todas antes de apagar qualquer coisa):
 5. Não é o disco de `/` nem o disco físico do contêiner APFS de `/` (`:63-67`).
 6. Capacidade ≥ `MIN_BYTES` = 120000000000 bytes (`:9`, `:70-72`).
 7. Pelo menos um instalador conhecido em `/Applications` (`:74-87`).
-8. Os dois arquivos da KIT existem no repositório (`:93-94`). A lista de travas do [plano do pendrive](plano_bancada_pendrive.md) não cita esta.
+8. Os dois arquivos da KIT existem no repositório (`:93-94`).
 9. Mostra `diskutil list` e exige `SIM` (`:97-101`).
 
 Durante a gravação, `confere_volume` (`:31-35`) confirma que `/Volumes/<nome>` pertence ao disco-alvo antes de cada `createinstallmedia` (`:116`) e da cópia para a KIT (`:122`). Isso evita gravar num volume homônimo de outro disco.
@@ -196,6 +196,7 @@ Registradas em [decisoes.md](decisoes.md). **Mudar qualquer uma exige um ADR nov
 - **ADR-003 — Um pendrive para todos os Macs.** O macOS fica nas partições; o Office é escolhido em tempo de execução. Motivo: um único produto físico para estoque e venda. Rejeitado (revogado): um pendrive por versão.
 - **ADR-004 — Repositório privado e proprietário.** Todos os direitos reservados à E.C.H.O Tech ([LICENSE](../LICENSE)). Rejeitado: licença aberta. A visibilidade privada é configurada no GitHub pelo Jota.
 - **ADR-005 — Piloto assistido nos Macs do cliente.** Não há Mac de bancada próprio na v0.1; o Mac de montagem é um Mac do cliente, e os planos de bancada são executados no piloto. Motivo: `createinstallmedia` e `diskutil` só existem no macOS, e os Macs do cliente são o hardware-alvo. Rejeitado: Mac na nuvem (sem USB), VM/Hackintosh (licença da Apple), comprar um Mac antes da primeira venda.
+- **ADR-006 — Escopo e manutenção da v0.1.** (A) O Tahoe 26 fica fora da v0.1: o MacBook Pro 16" 2019, único MacBook Intel que o aceita, recebe Sequoia. Motivo: um só modelo se beneficia, e o Mac de montagem típico não baixa o Tahoe. Rejeitado: partição `TAHOE`; reavaliar se aparecer demanda real. (B) O mapa de URLs do Office é revisado a cada nova imagem mestra ou versão do kit e sempre que um cliente relatar "o instalador da Microsoft não respondeu", usando o [update history](https://learn.microsoft.com/officeupdates/update-history-office-for-mac) da Microsoft.
 
 ## 8. Mapa do repositório
 
@@ -209,7 +210,7 @@ Proj_MACs/                         (nome no GitHub; o clone local pode ter outro
 ├── docs/
 │   ├── visao_geral.md             # Este documento
 │   ├── briefing.md                # Problema, causas, procedimento de bancada, tabela de modelos, estratégia comercial
-│   ├── decisoes.md                # ADR-001 a ADR-005
+│   ├── decisoes.md                # ADR-001 a ADR-006
 │   ├── guia_cliente.md            # Guia do cliente leigo, com marcadores [FOTO-NN] e itens "A CONFIRMAR NA BANCADA"
 │   ├── roteiro_piloto.md          # Checklist do piloto (Fases 0–5)
 │   ├── termo_piloto.md            # Termo de autorização do piloto
@@ -266,7 +267,7 @@ Estimativa do Tech Lead: cerca de **43%** do caminho até a primeira venda (prog
 | Risco | Onde está | Situação |
 | --- | --- | --- |
 | Licença Microsoft | ADR-001 | O kit não distribui Office; a ativação com a licença do cliente só será provada no Cenário 3 do plano do Office |
-| URLs do Office envelhecem | `scripts/install_office.sh:11-13` | URLs fixas no código; a trava `HEAD` (`:59-60`) só detecta o problema. O ADR-001 manda revisar o mapa a cada versão nova do Office. Processo ou periodicidade: não documentado no repositório |
+| URLs do Office envelhecem | `scripts/install_office.sh:11-13` | URLs fixas no código; a trava `HEAD` (`:59-60`) só detecta o problema. Revisão a cada nova imagem mestra ou versão do kit e a cada relato de "o instalador da Microsoft não respondeu" ([ADR-006](decisoes.md), decisão B) |
 | Modo de funcionalidade reduzida | ADR-001 | Office abaixo de 16.83 só abre e imprime; por isso não há Office para macOS ≤ 11 |
 | Bloqueio de Ativação e senha de firmware | briefing seção 5; termo item 5 | Não se contornam; o Mac fica fora do atendimento |
 | T2 apagado antes de liberar boot externo | briefing seção 5; guia passo 3 | O Utilitário de Segurança não autentica sem administrador no disco; resta só o Internet Recovery |
